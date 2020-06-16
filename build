@@ -1,0 +1,32 @@
+<project name="Lab3" default="build" basedir=".">
+    <property name="name" value="CalculatorFrame"/>
+    <property name="src.dir" location="${basedir}"/>
+    <property name="build" location="${basedir}/bin"/>
+    <property name="build.classes" location="${build}/classes"/>
+    <property name="build.jar" location="${build}/jar"/>
+
+    <target name="build" depends="clean" description="Builds the Application">
+        <mkdir dir="${build.classes}"/>
+
+        <javac srcdir="${src.dir}"
+               destdir="${build.classes}"
+               debug="false"
+               deprecation="true"
+               optimize="true" >
+        </javac>
+    </target>
+
+    <target name="make-jar" depends="build" description="Make jar file">
+        <jar jarfile="${build.jar}/${name}.jar">
+            <fileset dir="${build.classes}"/>
+            <manifest>
+                <attribute name="Main-Class" value="Lab3.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean" description="Removes all temp files">
+        <delete dir="${build.classes}"/>
+        <delete dir="${build.jar}"/>
+    </target>
+</project>
